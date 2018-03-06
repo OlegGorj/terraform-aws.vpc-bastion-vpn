@@ -40,7 +40,7 @@ The second option is recommended because you don’t need to expose your secrets
 
 Hence, `_main.tf` would look like:
 
-`
+```
 provider "aws" {
   region = "${var.region}"
 }
@@ -50,23 +50,23 @@ resource "aws_key_pair" "key" {
   public_key = "${file("staging_key.pub")}"
 }
 
-`
+```
 
 4. Run this command on dev folder: (Terraform’s commands should be run on the environments folder).
 
-`
+```
 cd ~/terraform/dev
 terraform get
 terraform plan
 
-`
+```
 
 5.  and, finally, apply the changes
 
-`
+```
 terraform apply
 
-`
+```
 
 
 
