@@ -1,7 +1,7 @@
 {
-  "name": "terraform-example",
+  "name": "vpcs-with-bastionbox.terraform",
   "version": "0.0.1",
-  "author": "Mike Ball <mikedball@gmail.com>",
+  "author": "",
   "scripts": {
     "start": "gulp",
     "build": "gulp build",

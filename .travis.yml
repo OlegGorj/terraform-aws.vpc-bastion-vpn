@@ -20,8 +20,8 @@ before_install:
 install:
   - npm install
 
-script:
-  - npm run build
+#script:
+#  - npm run build
 
 # install terraform
 before_deploy:
@@ -37,4 +37,4 @@ deploy:
     script: "./deploy.sh"
     on:
       repo: OlegGorj/vpcs-with-bastionbox.terraform
-      branch: master
+      branch: integration-with-travis
