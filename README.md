@@ -1,5 +1,7 @@
 # vpcs-with-bastionbox.terraform
 
+*note*: this repo is wip
+
 
 1.  Go into 'dev' folder.
 
@@ -16,7 +18,7 @@ ssh-keygen -t rsa -C "dev_key" -f ./dev_key
 
 3.  specify things like Access and secret key in some ways:
 
-Specify it directly in the provider (not recommended)
+option 1 - Specify it directly in the provider (not recommended)
 
 ```
 provider "aws" {
@@ -26,7 +28,7 @@ provider "aws" {
 }
 ```
 
-Using the AWS_ACCESS_KEY and AWS_SECRET_KEY environment variables
+option 2 - Using the AWS_ACCESS_KEY and AWS_SECRET_KEY environment variables
 
 ```
 $ export AWS_ACCESS_KEY_ID="myaccesskey"
@@ -35,6 +37,8 @@ $ export AWS_SECRET_ACCESS_KEY="mysecretkey"
 $ terraform plan
 
 ```
+
+Of course, there are bunch of other options to manage secrets and keys, but this is not the objective of this repo (although, it's on TODO list).
 
 The second option is recommended because you don’t need to expose your secrets on the file.
 
@@ -68,6 +72,7 @@ terraform apply
 
 ```
 
+6. testing step (wip)
 
 
 
