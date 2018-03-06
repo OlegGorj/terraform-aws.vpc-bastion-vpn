@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/oleggorj/vpcs-with-bastionbox.terraform.svg?branch=master)](https://travis-ci.org/oleggorj/vpcs-with-bastionbox.terraform)
+
+
 # vpcs-with-bastionbox.terraform
 
 *note*: this repo is wip
@@ -6,7 +9,7 @@
 1.  Go into 'dev' folder.
 
 ```
-cd ~/terraform/dev
+cd ~/dev
 ```
 
 2.  create the public key for the dev servers
@@ -59,7 +62,7 @@ resource "aws_key_pair" "key" {
 4. Run this command on dev folder: (Terraform’s commands should be run on the environments folder).
 
 ```
-cd ~/terraform/dev
+cd ~/dev
 terraform get
 terraform plan
 
@@ -73,7 +76,6 @@ terraform apply
 ```
 
 6. testing step (wip)
-
 
 
 ---
