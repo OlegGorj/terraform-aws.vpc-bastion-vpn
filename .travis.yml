@@ -13,17 +13,23 @@ env:
     - secure: "lF10BUiiZUWgNIyQVQjji2/12sC9GMcPlJnf1/GP4Ns3LivSHmL3ZgYYmJ3xOt4Mq8yifw4BGDc3KX1sPfDP9Cp9zLA2HxcfrVYMNNc2wDaHmQ5ehYEvhSpK/GYDGAS+YzqzHvmhHsivJGGO1/ElcfclJdQCZOLkVbooZMbiNL7xdx/ScRjz/FpW2l5aoYRn8NovK4GdfCUZF7VKXCUUXTelPT8jjbKjxiBA45kqiQxjV3zemS5DbHpQtPAkth2i89ezuW/nZonwdBkxyXbkbyx8JT6P3Pm2jMfsYdAD7bVvZ/I07ewKFaKVnAp9vQb/zSaqzDnGWprS6wylSKQe8OCzpmXp2OgNz2L/G8vjBImsID487wD5/XzLdqyfVRFiPCRsgcwjV9Ooj6arqo0scvrYBxKQmGsNmPpthGRoM1JSlt1FxJpbeBVK9awkImKRMuWtVhHcR3zv6v/Os+wIf3YO6J1pnfXXPtI8gHDFZiIGW6OjWn6pCgSj0dql6/dUqorDNjgWkBtZSY77ksvF8WS2dqOr8E9yc9TIKNCSk6nBU8CNICuOSGmGTdlfX4TrhYKEF9OcXk7ED6FRkII4RfqKFFpsZs8FlUCaYeSQnfQKKwkBAkKCVvdAfrCvCbkaK+OYb2R4TcAgYtw8gwDfjWSZSB4OEQEcU5IJSYddM+Q="
 
 # install terraform
-before_deploy:
+before_install:
   - curl -fSL "https://releases.hashicorp.com/terraform/0.11.3/terraform_0.11.3_linux_amd64.zip" -o terraform.zip
   - sudo unzip terraform.zip -d /opt/terraform
   - sudo ln -s /opt/terraform/terraform /usr/bin/terraform
   - rm -f terraform.zip
+  - sudo apt-get install git-all
+  - git --version
+
+install:
+  - git --version
+
 
 # terraform apply
-deploy:
-  - provider: script
-    skip_cleanup: true
-    script: "./deploy.sh"
-    on:
-      repo: OlegGorj/vpcs-with-bastionbox.terraform
-      branch: integration-with-travis
+#deploy:
+#  - provider: script
+#    skip_cleanup: true
+#    script: "./deploy.sh"
+#    on:
+#      repo: OlegGorj/vpcs-with-bastionbox.terraform
+#      branch: integration-with-travis
