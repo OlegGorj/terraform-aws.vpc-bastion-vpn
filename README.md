@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/oleggorj/vpcs-with-bastionbox.terraform.svg?branch=master)](https://travis-ci.org/oleggorj/vpcs-with-bastionbox.terraform)
+[![Build Status](https://travis-ci.org/OlegGorj/vpcs-with-bastionbox.terraform.svg?branch=master)](https://travis-ci.org/OlegGorj/vpcs-with-bastionbox.terraform)
 
 
 # vpcs-with-bastionbox.terraform
