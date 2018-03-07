@@ -1,13 +1,12 @@
-SHELL := bash
 
-GIT := git
-GO := go
-CURL := curl
-TAR := tar
+modules = $(shell find . -type f -name "*.tf" -exec dirname {} \;|sort -u)
 
 .PHONY: test
+
+default: test
+
 test:
+	@for m in $(modules); do (terraform validate "$$m" && echo "√ $$m") || exit 1 ; done
 
-
-.PHONY: assert-clean
-assert-clean:
+fmt:
+	@if [ `terraform fmt | wc -c` -ne 0 ]; then echo "terraform files need be formatted"; exit 1; fi
