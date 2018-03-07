@@ -22,6 +22,12 @@ variable "availability_zone" {
   description = "The az that the resources will be launched"
 }
 
+# Bastion
+variable "bastion_instance_type" {
+  description = "Type of ec2 instance used for bastion node"
+  default            = "t2.micro"
+}
+
 variable "bastion_ami" {
   default = {
     "us-east-1" = "ami-f652979b"
