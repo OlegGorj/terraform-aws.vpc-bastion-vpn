@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/OlegGorj/vpcs-with-bastionbox.terraform.svg?branch=master)](https://travis-ci.org/OlegGorj/vpcs-with-bastionbox.terraform)
+[![Build Status](https://travis-ci.org/OlegGorj/vpc-with-bastionbox.terraform.svg?branch=master)](https://travis-ci.org/OlegGorj/vpc-with-bastionbox.terraform)
 
 
 # vpcs-with-bastionbox.terraform
@@ -53,6 +53,13 @@ variable "cred-file" {
   default = "~/.aws/credentials"
 }
 
+```
+File `~/.aws/credentials` has following format:
+
+```
+[default]
+aws_access_key_id = <your access key>
+aws_secret_access_key = <your secret key>
 ```
 
 Of course, there are bunch of other options to manage secrets and keys, but this is not the objective of this repo (although, it's on TODO list).
@@ -191,13 +198,21 @@ ssh ubuntu@10.0.2.33
 
 9. Destroy everything
 
-and, finally, apply the changes
+And the last step is to destroy all setup
 
 ```
 => terraform destroy
 
 ```
 
+---
+
+
+## TODO
+
+- split public subnet into 2 subnets: public and private Devops
+- add VPN to private Devops subnet
+- use docker to deploy Ngnix
 
 
 ---
