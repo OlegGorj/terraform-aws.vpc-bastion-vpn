@@ -4,6 +4,8 @@ set -o errexit -o nounset
 
 cd dev
 
+terraform init
+
 terraform plan
 
 terraform apply
