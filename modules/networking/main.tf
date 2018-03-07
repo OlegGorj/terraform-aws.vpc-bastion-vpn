@@ -159,7 +159,7 @@ resource "aws_security_group" "bastion" {
 
 resource "aws_instance" "bastion" {
   ami                         = "${lookup(var.bastion_ami, var.region)}"
-  instance_type               = "t2.micro"
+  instance_type               = "${var.bastion_instance_type}"
   key_name                    = "${var.key_name}"
   monitoring                  = true
   vpc_security_group_ids      = ["${aws_security_group.bastion.id}"]
