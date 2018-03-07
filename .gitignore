@@ -1,3 +1,2 @@
-staging/terraform.tfstate*
-
-
+dev/terraform.*
+dev/.*
