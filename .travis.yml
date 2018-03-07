@@ -21,7 +21,6 @@ before_install:
 install:
   - git --version
   - git clone https://github.com/OlegGorj/vpcs-with-bastionbox.terraform.git
-  - git checkout integration-with-travis
   - git pull
 
 
