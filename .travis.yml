@@ -6,7 +6,7 @@ node_js:
 # establish environment variables
 env:
   global:
-    - GH_USER_NAME="TravisCI"
+    - GH_USER_NAME="oleggorj"
     - GH_USER_EMAIL="oleggorj@hotmail.com"
     - GH_REPO="OlegGorj/vpcs-with-bastionbox.terraform"
     # encrypted GH_TOKEN and AWS credentials
