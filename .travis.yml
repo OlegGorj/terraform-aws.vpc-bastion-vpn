@@ -16,9 +16,9 @@ before_install:
   - sudo ln -s /opt/terraform/terraform /usr/bin/terraform
   - rm -f terraform.zip
   - sudo apt-get install git-all
+  - echo $GH_TOKEN
 
 install:
-  - echo "GH_TOKEN: " $GH_TOKEN
   - git --version
   - git clone https://github.com/OlegGorj/vpcs-with-bastionbox.terraform.git
   - git pull
