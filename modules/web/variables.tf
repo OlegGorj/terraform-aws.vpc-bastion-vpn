@@ -16,6 +16,7 @@ variable "amis" {
 
 variable "instance_type" {
   description = "The instance type to launch"
+  default     = "t2.micro"
 }
 
 variable "private_subnet_id" {

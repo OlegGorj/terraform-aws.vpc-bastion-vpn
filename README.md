@@ -177,6 +177,9 @@ ssh -A ubuntu@ec2-18-144-46-178.us-west-1.compute.amazonaws.com
 
 ```
 
+*note:  It is not a good idea to use "SSH-agent forwarding," because this can pose a security risk. Instead you should invoke ssh with "-W" to forward stdin/stdout to your internal destination host.*
+
+
 At this point, you should see prompt of Bastion host:
 ```
 ubuntu@ip-10-0-1-71:

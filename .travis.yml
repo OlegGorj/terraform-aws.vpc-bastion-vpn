@@ -16,19 +16,10 @@ before_install:
   - sudo ln -s /opt/terraform/terraform /usr/bin/terraform
   - rm -f terraform.zip
   - sudo apt-get install git-all
-  - echo $GH_TOKEN
 
 install:
   - git --version
   - git clone https://github.com/OlegGorj/vpcs-with-bastionbox.terraform.git
-  - git pull
 
-
-# terraform apply
-#deploy:
-#  - provider: script
-#    skip_cleanup: true
-#    script: "./deploy.sh"
-#    on:
-#      repo: OlegGorj/vpcs-with-bastionbox.terraform
-#      branch: integration-with-travis
+script:
+  - echo "script section is running.."
