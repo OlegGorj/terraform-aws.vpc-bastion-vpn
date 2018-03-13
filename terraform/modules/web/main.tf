@@ -81,7 +81,7 @@ resource "aws_instance" "web" {
   key_name          = "${var.key_name}"
   user_data         = "${file("${path.module}/files/user_data.sh")}"
   tags = {
-    Name        = "${var.environment}-web-${count.index+1}"
+    Name        = "${var.environment}-webserver-${count.index+1}"
     Environment = "${var.environment}"
   }
 }
@@ -103,4 +103,15 @@ resource "aws_elb" "web" {
   tags {
     Environment = "${var.environment}"
   }
+}
+
+###############################################################################
+# OUTPUT
+###############################################################################
+output "elb.hostname" {
+  value = "${aws_elb.web.dns_name}"
+}
+
+output "web_private_ip" {
+  value = ["${aws_instance.web.*.private_ip}"]
 }

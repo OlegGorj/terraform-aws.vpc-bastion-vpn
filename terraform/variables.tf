@@ -12,9 +12,9 @@ variable "key_name" {
   default = "~/.ssh/dev_key"
 }
 
-variable "region" {
-  description = "Region that the instances will be created"
-  default = "us-west-1"
+variable "public_key_name" {
+  description = "The aws keypair to use"
+  default = "~/.ssh/dev_key.pub"
 }
 
 variable "availability_zone" {
