@@ -83,11 +83,11 @@ module "openvpn" {
   ami = "${lookup(var.bastion_amis, var.region)}"
   instance_type = "t2.micro"
   key_name            = "${aws_key_pair.key.key_name}"
-  admin_user = ""
-  admin_pw   = ""
+  admin_user = "admin"
+  admin_pw   = "very_secret_password"
   private_key = "${file("~/.ssh/dev_key")}"
   vpn_data_vol = "vpn_data_vol"
-  vpn_client_name = "docker"
+  vpn_client_name = "ubuntu"
   ssh_remote_user = "ubuntu"
 }
 

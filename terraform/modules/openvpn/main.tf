@@ -126,8 +126,8 @@ resource "aws_instance" "vpn" {
   monitoring                  = true
   associate_public_ip_address = true
   user_data = <<USERDATA
-admin_user="admin"
-admin_pw="password01"
+admin_user="${var.admin_user}"
+admin_pw="${var.admin_pw}"
 USERDATA
 
   tags {
@@ -158,11 +158,11 @@ USERDATA
   }
 
   provisioner "local-exec" {
-    command    = "ssh-keyscan -T 120 ${aws_instance.vpn.public_ip} >> ~/.ssh/known_hosts"
+    command    = "ssh-keyscan -T 120 ${aws_instance.vpn.public_dns} >> ~/.ssh/known_hosts"
   }
 
   provisioner "local-exec" {
-    command    = "scp ${var.ssh_remote_user}@${aws_instance.vpn.public_ip}:~/${var.vpn_client_name}.ovpn ."
+    command    = "scp ${var.ssh_remote_user}@${aws_instance.vpn.public_dns}:~/${var.vpn_client_name}.ovpn ."
   }
 
 }

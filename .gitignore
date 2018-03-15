@@ -2,3 +2,4 @@ dev/terraform.*
 dev/.*
 *.tfstate
 .terraform*
+*.xml
