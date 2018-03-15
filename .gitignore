@@ -1,5 +1,5 @@
-dev/terraform.*
-dev/.*
+terraform/terraform.*
 *.tfstate
 .terraform*
 *.xml
+*.ovpn

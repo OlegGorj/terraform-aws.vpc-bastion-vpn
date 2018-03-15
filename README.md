@@ -135,9 +135,13 @@ resource "aws_key_pair" "key" {
 
 #### 5. Run this command on terraform folder: (Terraform’s commands should be run on the environments folder).
 
+Assuming, bucket with the name `aws-terraform-state-bucket` already created.
+
 ```
 => cd ~/terraform
-=> terraform init
+
+=> terraform init -backend-config="bucket=aws-terraform-state-bucket" -backend-config="key=vpc-with-bastionbox.tfstate" -backend-config="region=us-west-1" -var-file=./environments/dev/inputs.tfvars
+
 => terraform get
 => terraform plan
 

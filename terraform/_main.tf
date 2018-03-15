@@ -1,26 +1,9 @@
 
-
-variable "region" {
-  description = "Region that the instances will be created"
-  default = "us-west-1"
-}
-variable "bastion_amis" {
-  description = "Base AMI to launch the instances with"
-  default = {
-    "us-east-1" = "ami-f652979b"
-    "us-east-2" = "ami-fcc19b99"
-    "us-west-1" = "ami-16efb076"
-    "us-west-2" = "ami-a58d0dc5"
-    "ap-northeast-1" = "ami-c68fc7a1"
-    "ap-northeast-2" = "ami-93d600fd"
-  }
-}
-
 ###############################################################################
 # RESOURCES
 ###############################################################################
 provider "aws" {
-  region = "${var.region}"
+  region = "${var.aws_region}"
   shared_credentials_file  = "${var.cred-file}"
 }
 
@@ -32,11 +15,11 @@ resource "aws_key_pair" "key" {
 module "networking" {
   source              = "./modules/networking"
   environment         = "${var.environment}"
-  region              = "${var.region}"
+  region              = "${var.aws_region}"
   availability_zone   = "${var.availability_zone}"
   vpc_cidr            = "${var.vpc_cidr}"
-  public_subnet_cidr  = "${var.public_subnet_cidr}"
-  private_subnet_cidr = "${var.private_subnet_cidr}"
+  public_subnet_cidr  = "${var.public-1_subnet_cidr}"
+  private_subnet_cidr = "${var.private-1_subnet_cidr}"
   key_name            = "${aws_key_pair.key.key_name}"
 }
 
@@ -45,7 +28,7 @@ module "web" {
   environment         = "${var.environment}"
   vpc_id              = "${module.networking.vpc_id}"
   web_instance_count  = "${var.web_instance_count}"
-  region              = "${var.region}"
+  region              = "${var.aws_region}"
   public_subnet_id    = "${module.networking.public_subnet_id}"
   private_subnet_id   = "${module.networking.private_subnet_id}"
   vpc_sg_id           = "${module.networking.default_sg_id}"
@@ -62,7 +45,7 @@ module "bastion" {
   ssh_port = 22
   icmp_port_from = 8
   icmp_port_to = 0
-  ami = "${lookup(var.bastion_amis, var.region)}"
+  ami = "${lookup(var.bastion_amis, var.aws_region)}"
   instance_type = "t2.micro"
   key_name            = "${aws_key_pair.key.key_name}"
   private_key = "${file("~/.ssh/dev_key")}"
@@ -80,11 +63,11 @@ module "openvpn" {
   icmp_port_from = 8
   icmp_port_to = 0
   ui_port = "443"
-  ami = "${lookup(var.bastion_amis, var.region)}"
+  ami = "${lookup(var.bastion_amis, var.aws_region)}"
   instance_type = "t2.micro"
   key_name            = "${aws_key_pair.key.key_name}"
   admin_user = "admin"
-  admin_pw   = "very_secret_password"
+  admin_pw   = "very_secret_"
   private_key = "${file("~/.ssh/dev_key")}"
   vpn_data_vol = "vpn_data_vol"
   vpn_client_name = "ubuntu"
