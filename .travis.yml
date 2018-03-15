@@ -1,6 +1,7 @@
 language: bash
 sudo: required
 
+# establish environment variables
 env:
   global:
     - GH_USER_NAME="oleggorj"
@@ -20,13 +21,6 @@ install:
   - git --version
   - git clone https://github.com/OlegGorj/vpcs-with-bastionbox.terraform.git
   - echo "GH_TOKEN: " $GH_TOKEN
-
-
-# terraform apply
-#deploy:
-#  - provider: script
-#    skip_cleanup: true
-#    script: "./deploy.sh"
-#    on:
-#      repo: OlegGorj/vpcs-with-bastionbox.terraform
-#      branch: integration-with-travis
+  
+script:
+  - echo "script section is running.."
