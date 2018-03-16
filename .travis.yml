@@ -21,6 +21,6 @@ install:
   - git --version
   - git clone https://github.com/OlegGorj/vpcs-with-bastionbox.terraform.git
   - echo "GH_TOKEN: " $GH_TOKEN
-  
+
 script:
   - echo "script section is running.."

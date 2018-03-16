@@ -21,13 +21,15 @@ jobs:
       - run: apt-get update
       - run: apt-get -y install build-essential
       - run: apt-get -y install curl
+      - run: apt-get -y install unzip
+      - run: apt-get -y install git-all
+      - run: apt-get -y install awscli
+      - run: mkdir ~/.aws
       - run: curl -fSL "https://releases.hashicorp.com/terraform/0.11.3/terraform_0.11.3_linux_amd64.zip" -o terraform.zip
       - run: unzip terraform.zip -d /opt/terraform
       - run: ln -s /opt/terraform/terraform /usr/bin/terraform
       - run: rm -f terraform.zip
-      - run: apt-get install git-all
-      - run: cd project
-      - run:
-          name: test build
-          shell: /bin/sh
-          command: make test
+      - run: mkdir ~/.ssh
+      - run: ssh-keygen -t rsa -C "dev_key" -f ~/.ssh/dev_key
+      - run: cd terraform
+      - run: terraform validate -var-file=./environments/dev/inputs.tfvars
