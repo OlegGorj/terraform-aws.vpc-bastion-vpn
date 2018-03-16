@@ -30,6 +30,7 @@ jobs:
       - run: ln -s /opt/terraform/terraform /usr/bin/terraform
       - run: rm -f terraform.zip
       - run: mkdir ~/.ssh
-      - run: ssh-keygen -t rsa -C "dev_key" -f ~/.ssh/dev_key
+      - run: ssh-keygen -t rsa -N '' -f ~/.ssh/dev_key -C "dev_key"
       - run: cd terraform
+      - run: terraform init -backend-config="bucket=aws-terraform-state-bucket" -backend-config="key=vpc-with-bastionbox.tfstate" -backend-config="region=us-west-1" -var-file=./environments/dev/inputs.tfvars
       - run: terraform validate -var-file=./environments/dev/inputs.tfvars
