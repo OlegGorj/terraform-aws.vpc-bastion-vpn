@@ -17,7 +17,6 @@ jobs:
       - image: ubuntu:xenial
     steps:
       - checkout
-      - run:
       - run: ls -la
       - run: apt-get -y install build-essential
       - run: apt-get -y install curl
