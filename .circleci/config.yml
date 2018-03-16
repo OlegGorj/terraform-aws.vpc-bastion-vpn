@@ -18,10 +18,15 @@ jobs:
     steps:
       - checkout
       - run:
-          name: current directory
-          command: pwd
       - run: ls -la
-      - run: apt-get install build-essential
+      - run: apt-get -y install build-essential
+      - run: apt-get -y install curl
+      - run: curl -fSL "https://releases.hashicorp.com/terraform/0.11.3/terraform_0.11.3_linux_amd64.zip" -o terraform.zip
+      - run: unzip terraform.zip -d /opt/terraform
+      - run: ln -s /opt/terraform/terraform /usr/bin/terraform
+      - run: rm -f terraform.zip
+      - run: apt-get install git-all
+      - run: cd project
       - run:
           name: test build
           shell: /bin/sh
