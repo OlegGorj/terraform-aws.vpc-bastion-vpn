@@ -14,12 +14,14 @@ jobs:
           command: date
   build:
     docker:
-      - image: ubuntu:xenial
+      - image: debian:stretch
     steps:
       - checkout
       - run:
           name: current directory
           command: pwd
+      - run: ls -la
+      - run: sudo apt-get install build-essential
       - run:
           name: test build
           shell: /bin/sh
