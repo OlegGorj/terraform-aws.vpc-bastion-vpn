@@ -1,17 +1,5 @@
 version: 2
-
 jobs:
-  build:
-    docker:
-      - image: debian:stretch
-    steps:
-      - checkout
-      - run:
-          name: Greeting
-          command: echo Hello, world.
-      - run:
-          name: Print the Current Time
-          command: date
   build:
     docker:
       - image: ubuntu:xenial
@@ -31,6 +19,13 @@ jobs:
       - run: rm -f terraform.zip
       - run: mkdir ~/.ssh
       - run: ssh-keygen -t rsa -N '' -f ~/.ssh/dev_key -C "dev_key"
-      - run: cd terraform
-      - run: terraform init -backend-config="bucket=aws-terraform-state-bucket" -backend-config="key=vpc-with-bastionbox.tfstate" -backend-config="region=us-west-1" -var-file=./environments/dev/inputs.tfvars
-      - run: terraform validate -var-file=./environments/dev/inputs.tfvars
+      - run:
+          command: |
+            echo Running test - terraform init
+            cd terraform
+            terraform init -backend-config="bucket=aws-terraform-state-bucket" -backend-config="key=vpc-with-bastionbox.tfstate" -backend-config="region=us-west-1" -var-file=./environments/dev/inputs.tfvars
+      - run:
+          command: |
+            echo Running test - terraform validate
+            cd terraform
+            terraform validate -var-file=./environments/dev/inputs.tfvars
