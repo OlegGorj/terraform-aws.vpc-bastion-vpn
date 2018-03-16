@@ -13,11 +13,14 @@ jobs:
           name: Print the Current Time
           command: date
   build:
+    docker:
+      - image: ubuntu:xenial
     steps:
+      - checkout
       - run:
           name: current directory
           command: pwd
       - run:
           name: test build
-          shell: /bin/sh 
+          shell: /bin/sh
           command: make test
