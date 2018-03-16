@@ -18,6 +18,7 @@ jobs:
     steps:
       - checkout
       - run: ls -la
+      - run: apt-get update
       - run: apt-get -y install build-essential
       - run: apt-get -y install curl
       - run: curl -fSL "https://releases.hashicorp.com/terraform/0.11.3/terraform_0.11.3_linux_amd64.zip" -o terraform.zip
