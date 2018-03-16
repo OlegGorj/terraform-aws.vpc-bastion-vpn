@@ -1,4 +1,5 @@
 version: 2
+
 jobs:
   build:
     docker:
@@ -11,3 +12,12 @@ jobs:
       - run:
           name: Print the Current Time
           command: date
+  build:
+    steps:
+      - run:
+          name: current directory
+          command: pwd
+      - run:
+          name: test build
+          shell: /bin/sh 
+          command: make test
