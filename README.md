@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/OlegGorj/vpc-with-bastionbox.terraform.svg?branch=master)](https://travis-ci.org/OlegGorj/vpc-with-bastionbox.terraform)
 [![CircleCI](https://circleci.com/gh/OlegGorj/vpc-with-bastionbox.terraform/tree/master.svg?style=svg)](https://circleci.com/gh/OlegGorj/vpc-with-bastionbox.terraform/tree/master)
-
+[![github-image](https://img.shields.io/github/release/squidfunk/terraform-aws-github-ci.svg)] (https://github.com/OlegGorj/vpc-with-bastionbox.terraform/releases)
 
 # Repository vpcs-with-bastionbox.terraform
 
@@ -292,11 +292,6 @@ And the last step is to destroy all setup
 
 ## TODOs
 
-- use docker to properly deploy Ngnix
-- integration with Vault and KMS to manage secrets and keys
-- create clean Makefile to support deployment with Travis
-- add autoscale group for Web nodes
-- reorganize code structure into modular for simpler deployment
 
 
 ---
