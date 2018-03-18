@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/OlegGorj/vpc-with-bastionbox.terraform.svg?branch=master)](https://travis-ci.org/OlegGorj/vpc-with-bastionbox.terraform)
 [![CircleCI](https://circleci.com/gh/OlegGorj/vpc-with-bastionbox.terraform/tree/master.svg?style=svg)](https://circleci.com/gh/OlegGorj/vpc-with-bastionbox.terraform/tree/master)
-[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)] (https://github.com/OlegGorj/vpc-with-bastionbox.terraform/releases)
+[![GitHub release](https://img.shields.io/github/release/OlegGorj/vpc-with-bastionbox.terraform.svg)](https://github.com/OlegGorj/vpc-with-bastionbox.terraform/releases)
 
 # Repository vpcs-with-bastionbox.terraform
 
