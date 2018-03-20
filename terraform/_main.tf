@@ -1,4 +1,8 @@
 
+variable instance_type_default {
+  default = "t2.micro"
+}
+
 ###############################################################################
 # RESOURCES
 ###############################################################################
@@ -27,13 +31,16 @@ module "web" {
   source              = "./modules/web"
   environment         = "${var.environment}"
   vpc_id              = "${module.networking.vpc_id}"
-  web_instance_count  = "${var.web_instance_count}"
+  min_size            = 2
+  max_size            = 10
   region              = "${var.aws_region}"
-  public_subnet_id    = "${module.networking.public_subnet_id}"
-  private_subnet_id   = "${module.networking.private_subnet_id}"
   vpc_sg_id           = "${module.networking.default_sg_id}"
   vpc_cidr_block      = "${var.vpc_cidr}"
   key_name            = "${aws_key_pair.key.key_name}"
+  availability_zones  = ["us-west-1a"]
+  subnet_ids          = ["${module.networking.private_subnet_id}"]
+  instance_type       = "${var.instance_type_default}"
+  public_subnet_id    = "${module.networking.public_subnet_id}"
 }
 
 module "bastion" {

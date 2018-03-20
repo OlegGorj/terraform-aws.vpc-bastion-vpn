@@ -52,8 +52,13 @@ variable "availability_zone" {
   default = "us-west-1a"
 }
 
-# Web
-variable "web_instance_count" {
-  description = "The total of web instances to run"
-  default  = 2
+variable "azs" {
+    type    = "map"
+    default = {
+        "ap-southeast-2" = "ap-southeast-2a,ap-southeast-2b,ap-southeast-2c"
+        "eu-west-1"      = "eu-west-1a,eu-west-1b,eu-west-1c"
+        "us-west-1"      = "us-west-1b,us-west-1c"
+        "us-west-2"      = "us-west-2a,us-west-2b,us-west-2c"
+        "us-east-1"      = "us-east-1c,us-west-1d,us-west-1e"
+    }
 }

@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/OlegGorj/vpc-with-bastionbox.terraform.svg?branch=master)](https://travis-ci.org/OlegGorj/vpc-with-bastionbox.terraform)
 [![CircleCI](https://circleci.com/gh/OlegGorj/vpc-with-bastionbox.terraform/tree/master.svg?style=svg)](https://circleci.com/gh/OlegGorj/vpc-with-bastionbox.terraform/tree/master)
 [![GitHub release](https://img.shields.io/github/release/OlegGorj/vpc-with-bastionbox.terraform.svg)](https://github.com/OlegGorj/vpc-with-bastionbox.terraform/releases)
+[![GitHub issues](https://img.shields.io/github/issues/OlegGorj/vpc-with-bastionbox.terraform.svg)](https://github.com/OlegGorj/vpc-with-bastionbox.terraform/issues)
 
 # Repository vpcs-with-bastionbox.terraform
 
@@ -221,7 +222,7 @@ dev-web-lb-XXXXXXX.us-west-1.elb.amazonaws.com
 Copy and paste it into the browser window, specify port 80
 
 ```
-dev-web-lb-XXXXXXX.us-west-1.elb.amazonaws.com:80
+dev-web-lb-XXXXXXX.us-west-1.elb.amazonaws.com:8080
 ```
 
 You should see Nginx welcome screen.
