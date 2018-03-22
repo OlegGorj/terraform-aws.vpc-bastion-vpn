@@ -16,3 +16,5 @@ private-2_create = true
 public-1_subnet_cidr = "10.233.1.0/28"
 private-1_subnet_cidr = "10.233.2.0/28"
 private-2_subnet_cidr = "10.233.3.0/28"
+
+private_key_file         = "~/.ssh/dev_key"

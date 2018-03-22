@@ -6,9 +6,25 @@ variable instance_type_default {
 ###############################################################################
 # RESOURCES
 ###############################################################################
+//module "provider" {
+//  source                  = "./modules/provider"
+//  shared_credentials_file = "${var.cred-file}"
+//  aws_region              = "${var.aws_region}"
+//  aws_account             = "${var.aws_account}"
+//}
+
 provider "aws" {
   region = "${var.aws_region}"
   shared_credentials_file  = "${var.cred-file}"
+}
+
+terraform {
+  backend "s3" {
+    bucket = "aws-terraform-state-bucket"
+    key = "vpc-with-bastionbox.tfstate"
+    region = "us-west-1"
+    profile = "dev"
+  }
 }
 
 resource "aws_key_pair" "key" {
@@ -36,11 +52,15 @@ module "web" {
   region              = "${var.aws_region}"
   vpc_sg_id           = "${module.networking.default_sg_id}"
   vpc_cidr_block      = "${var.vpc_cidr}"
-  key_name            = "${aws_key_pair.key.key_name}"
-  availability_zones  = ["us-west-1a"]
-  subnet_ids          = ["${module.networking.private_subnet_id}"]
+  availability_zones  = ["${var.availability_zone}"]
   instance_type       = "${var.instance_type_default}"
+
   public_subnet_id    = "${module.networking.public_subnet_id}"
+  subnet_ids          = ["${module.networking.private_subnet_id}"]
+
+  key_name            = "${aws_key_pair.key.key_name}"
+  private_key         = "${file("${var.private_key_file}")}"
+
 }
 
 module "bastion" {

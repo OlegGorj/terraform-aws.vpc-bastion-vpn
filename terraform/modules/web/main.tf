@@ -16,10 +16,6 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-//variable "private_subnet_id" {
-//  description = "The id of the private subnet to launch the instances"
-//}
-
 variable "public_subnet_id" {
   description = "The id of the public subnet to launch the load balancer"
 }
@@ -58,6 +54,9 @@ variable "availability_zones" {
 variable "subnet_ids" {
     type    = "list"
     default = []
+}
+variable "private_key" {
+  default = ""
 }
 
 ###############################################################################
@@ -151,10 +150,11 @@ resource "aws_elb" "web" {
   }
 }
 
+###############################################################################
+
 resource "aws_launch_configuration" "web_config" {
   image_id          = "${lookup(var.web_amis, var.region)}"
   instance_type     = "${var.instance_type}"
-  user_data         = "${data.template_file.webhost.rendered}"
   security_groups = [ "${aws_security_group.web_server_sg.id}" ]
   key_name          = "${var.key_name}"
   user_data         = "${data.template_file.webhost.rendered}"
@@ -165,7 +165,8 @@ resource "aws_launch_configuration" "web_config" {
 }
 
 data "template_file" "webhost" {
-    template = "${file("${path.module}/files/user_data.sh")}"
+//    template = "${file("${path.module}/files/user_data.sh")}"
+    template = "${file("${path.module}/../../assets/docker/docker_install.sh")}"
     vars {
         cidr                = "${var.vpc_cidr_block}"
         domain              = "${aws_elb.web.dns_name}"
@@ -175,7 +176,7 @@ data "template_file" "webhost" {
 resource "aws_autoscaling_group" "as_web_group" {
   name = "AS_Web_Group"
   launch_configuration = "${aws_launch_configuration.web_config.id}"
-  availability_zones   = ["us-west-1a"]  //["${var.availability_zones}"]
+  availability_zones   = ["${var.availability_zones}"]
   load_balancers        = ["${aws_elb.web.name}"]
   health_check_type     = "ELB"
   vpc_zone_identifier   = ["${var.subnet_ids}"]
@@ -196,6 +197,23 @@ resource "aws_autoscaling_group" "as_web_group" {
     value               = "${var.environment}"
     propagate_at_launch = true
   }
+
+//  connection {
+//      user = "ubuntu"
+//      private_key = "${var.private_key}"
+//  }
+//  provisioner "file" {
+//    source      = "${path.module}/files/user_data.sh"
+//    destination = "/tmp"
+//  }
+//  provisioner "remote-exec" {
+//    inline = [
+//      "sudo touch /var/log/tf/remote.log; sudo chmod go+rw /var/log/tf/remote.log",
+//      "sudo chmod a+xrw /tmp/user_data.sh",
+//      "sudo /tmp/user_data.sh >> /var/log/tf/remote.log 2>&1",
+//    ]
+//  }
+
 }
 
 ###############################################################################
@@ -204,7 +222,3 @@ resource "aws_autoscaling_group" "as_web_group" {
 output "elb.hostname" {
   value = "${aws_elb.web.dns_name}"
 }
-
-//output "web_private_ip" {
-//  value = ["${aws_instance.web.*.private_ip}"]
-//}

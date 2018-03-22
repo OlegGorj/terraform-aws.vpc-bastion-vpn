@@ -179,10 +179,10 @@ Assuming, bucket with the name `aws-terraform-state-bucket` already created.
 ```
 => cd ~/terraform
 
-=> terraform init -backend-config="bucket=aws-terraform-state-bucket" -backend-config="key=vpc-with-bastionbox.tfstate" -backend-config="region=us-west-1" -var-file=./environments/dev/inputs.tfvars
+=>  rm -rf .terraform/* ; terraform init -backend-config="bucket=aws-terraform-state-bucket" -backend-config="key=vpc-with-bastionbox.tfstate" -backend-config="region=us-west-1" -var-file=./environments/dev/inputs.tfvars
 
 => terraform get
-=> terraform plan
+=> terraform plan -var-file=./environments/dev/inputs.tfvars
 
 ```
 
@@ -196,7 +196,7 @@ Plan: 21 to add, 0 to change, 0 to destroy.
 #### 6.  and, finally, apply the changes
 
 ```
-=> terraform apply
+=> terraform apply -var-file=./environments/dev/inputs.tfvars
 
 ```
 
@@ -281,7 +281,7 @@ ssh ubuntu@10.0.2.33
 
 #### 11. Destroy everything
 
-And the last step is to destroy all setup
+And the last step is to destroy all infrastructure
 
 
 ```

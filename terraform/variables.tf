@@ -5,6 +5,7 @@
 # AWS Account Settings
 variable "aws_account" {}
 variable "aws_region" {}
+//variable "vpc_regions" {}
 variable "vpc_name" {}
 variable "vpc_cidr" {}
 variable "r53_zone_name" {}
@@ -16,6 +17,8 @@ variable "private-1_create" {}
 variable "private-2_create" {}
 variable "private-1_subnet_cidr" {}
 variable "private-2_subnet_cidr" {}
+
+variable "private_key_file" {}
 
 variable "bastion_amis" {
   description = "Base AMI to launch the instances with"
@@ -52,12 +55,12 @@ variable "availability_zone" {
   default = "us-west-1a"
 }
 
-variable "azs" {
+variable "availability_zones" {
     type    = "map"
     default = {
         "ap-southeast-2" = "ap-southeast-2a,ap-southeast-2b,ap-southeast-2c"
         "eu-west-1"      = "eu-west-1a,eu-west-1b,eu-west-1c"
-        "us-west-1"      = "us-west-1b,us-west-1c"
+        "us-west-1"      = "us-west-1a,us-west-1b,us-west-1c"
         "us-west-2"      = "us-west-2a,us-west-2b,us-west-2c"
         "us-east-1"      = "us-east-1c,us-west-1d,us-west-1e"
     }

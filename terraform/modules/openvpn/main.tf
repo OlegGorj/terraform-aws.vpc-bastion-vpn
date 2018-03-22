@@ -160,7 +160,9 @@ USERDATA
   provisioner "local-exec" {
     command    = "ssh-keyscan -T 120 ${aws_instance.vpn.public_dns} >> ~/.ssh/known_hosts"
   }
-
+  provisioner "local-exec" {
+    command    = "ssh-keyscan -T 120 ${aws_instance.vpn.public_ip} >> ~/.ssh/known_hosts"
+  }
   provisioner "local-exec" {
     command    = "scp ${var.ssh_remote_user}@${aws_instance.vpn.public_dns}:~/${var.vpn_client_name}.ovpn ."
   }
