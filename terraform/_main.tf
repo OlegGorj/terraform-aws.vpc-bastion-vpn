@@ -47,7 +47,7 @@ module "web" {
   source              = "./modules/web"
   environment         = "${var.environment}"
   vpc_id              = "${module.networking.vpc_id}"
-  min_size            = 2
+  min_size            = 1
   max_size            = 10
   region              = "${var.aws_region}"
   vpc_sg_id           = "${module.networking.default_sg_id}"
@@ -56,6 +56,7 @@ module "web" {
   instance_type       = "${var.instance_type_default}"
 
   public_subnet_id    = "${module.networking.public_subnet_id}"
+  private_subnet_id    = "${module.networking.private_subnet_id}"
   subnet_ids          = ["${module.networking.private_subnet_id}"]
 
   key_name            = "${aws_key_pair.key.key_name}"

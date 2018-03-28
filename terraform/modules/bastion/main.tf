@@ -118,6 +118,25 @@ resource "aws_instance" "bastion" {
     inline = [
       "sudo apt-get update",
       "sudo touch /var/log/bastion.tf.log",
+
+//      # Ensure dependencies are installed
+//      yum install -y epel-release
+//      yum update -y epel-release
+//      yum install -y python-pip \
+//          python-devel \
+//          git \
+//          openssl-devel \
+//          libffi-devel \
+//          awscli \
+//          python-six \
+//          python-boto \
+//          python-jinja2 \
+//          python-demjson \
+//          ansible
+//
+//      pip install --upgrade pip
+//      pip install --upgrade setuptools
+//
     ]
   }
 }

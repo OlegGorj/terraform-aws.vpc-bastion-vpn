@@ -19,6 +19,9 @@ variable "instance_type" {
 variable "public_subnet_id" {
   description = "The id of the public subnet to launch the load balancer"
 }
+variable "private_subnet_id" {
+  description = "The id of the public subnet to launch the load balancer"
+}
 
 variable "vpc_sg_id" {
   description = "The default security group from the vpc"
@@ -151,26 +154,16 @@ resource "aws_elb" "web" {
 }
 
 ###############################################################################
-
 resource "aws_launch_configuration" "web_config" {
   image_id          = "${lookup(var.web_amis, var.region)}"
   instance_type     = "${var.instance_type}"
   security_groups = [ "${aws_security_group.web_server_sg.id}" ]
   key_name          = "${var.key_name}"
-  user_data         = "${data.template_file.webhost.rendered}"
+  user_data         = "${data.template_cloudinit_config.webserver_init.rendered}"
 
   lifecycle {
     create_before_destroy = true
   }
-}
-
-data "template_file" "webhost" {
-//    template = "${file("${path.module}/files/user_data.sh")}"
-    template = "${file("${path.module}/../../assets/docker/docker_install.sh")}"
-    vars {
-        cidr                = "${var.vpc_cidr_block}"
-        domain              = "${aws_elb.web.dns_name}"
-    }
 }
 
 resource "aws_autoscaling_group" "as_web_group" {
@@ -187,38 +180,72 @@ resource "aws_autoscaling_group" "as_web_group" {
   lifecycle {
     create_before_destroy = true
   }
-  tag {
-    key                 = "Name"
-    value               = "${var.environment}-webserver-cluster"
-    propagate_at_launch = true
-  }
-  tag {
-    key                 = "Environment"
-    value               = "${var.environment}"
-    propagate_at_launch = true
-  }
-
-//  connection {
-//      user = "ubuntu"
-//      private_key = "${var.private_key}"
-//  }
-//  provisioner "file" {
-//    source      = "${path.module}/files/user_data.sh"
-//    destination = "/tmp"
-//  }
-//  provisioner "remote-exec" {
-//    inline = [
-//      "sudo touch /var/log/tf/remote.log; sudo chmod go+rw /var/log/tf/remote.log",
-//      "sudo chmod a+xrw /tmp/user_data.sh",
-//      "sudo /tmp/user_data.sh >> /var/log/tf/remote.log 2>&1",
-//    ]
-//  }
+  tags = [
+    {
+      key                 = "Name"
+      value               = "${var.environment}-webserver-cluster"
+      propagate_at_launch = true
+    },
+    {
+      key                 = "Environment"
+      value               = "${var.environment}"
+      propagate_at_launch = true
+    },
+  ]
 
 }
+
+
+
+data "template_file" "docker_init_script" {
+  template = "${file("${path.module}/../../assets/docker/web_init.sh")}"
+  vars {
+      cidr                = "${var.vpc_cidr_block}"
+      domain              = "${aws_elb.web.dns_name}"
+      TERRAFORM_user      = "ubuntu"
+  }
+}
+data "template_file" "ngnix_init_script" {
+  template = "${file("${path.module}/../../assets/ngnix/ngnix_install.sh")}"
+  vars {
+      cidr                = "${var.vpc_cidr_block}"
+      domain              = "${aws_elb.web.dns_name}"
+      TERRAFORM_user      = "ubuntu"
+  }
+}
+data "template_cloudinit_config" "webserver_init" {
+  part {
+    content_type = "text/x-shellscript"
+    content      = "${data.template_file.docker_init_script.rendered}"
+  }
+  part {
+    content_type = "text/x-shellscript"
+    content      = "${data.template_file.ngnix_init_script.rendered}"
+  }
+}
+
+//resource "aws_instance" "instance" {
+//  ami                    = "${lookup(var.web_amis, var.region)}"
+//  instance_type          = "t2.micro"
+//  vpc_security_group_ids = [ "${aws_security_group.web_server_sg.id}" ]
+//  subnet_id              = "${var.private_subnet_id}"
+//  key_name               = "${var.key_name}"
+//
+//  tags {
+//    Name                 = "${var.environment}-ws-experemental-instance"
+//  }
+//
+//  user_data     = "${data.template_cloudinit_config.webserver_init.rendered}"
+//
+//}
 
 ###############################################################################
 # OUTPUT
 ###############################################################################
 output "elb.hostname" {
   value = "${aws_elb.web.dns_name}"
+}
+
+output "asg.nodes" {
+  value = "${aws_autoscaling_group.}"
 }
