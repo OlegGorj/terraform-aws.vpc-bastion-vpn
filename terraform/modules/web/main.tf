@@ -245,7 +245,3 @@ data "template_cloudinit_config" "webserver_init" {
 output "elb.hostname" {
   value = "${aws_elb.web.dns_name}"
 }
-
-output "asg.nodes" {
-  value = "${aws_autoscaling_group.}"
-}
