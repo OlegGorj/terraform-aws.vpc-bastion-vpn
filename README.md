@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/OlegGorj/vpc-with-bastionbox.terraform.svg?branch=master)](https://travis-ci.org/OlegGorj/vpc-with-bastionbox.terraform)
-[![CircleCI](https://circleci.com/gh/OlegGorj/vpc-with-bastionbox.terraform/tree/master.svg?style=svg)](https://circleci.com/gh/OlegGorj/vpc-with-bastionbox.terraform/tree/master)
-[![GitHub release](https://img.shields.io/github/release/OlegGorj/vpc-with-bastionbox.terraform.svg)](https://github.com/OlegGorj/vpc-with-bastionbox.terraform/releases)
-[![GitHub issues](https://img.shields.io/github/issues/OlegGorj/vpc-with-bastionbox.terraform.svg)](https://github.com/OlegGorj/vpc-with-bastionbox.terraform/issues)
+[![Build Status](https://travis-ci.org/OlegGorj/terraform-aws.vpc-bastion-vpn.svg?branch=master)](https://travis-ci.org/OlegGorj/terraform-aws.vpc-bastion-vpn)
+[![CircleCI](https://circleci.com/gh/OlegGorj/terraform-aws.vpc-bastion-vpn/tree/master.svg?style=svg)](https://circleci.com/gh/OlegGorj/terraform-aws.vpc-bastion-vpn/tree/master)
+[![GitHub release](https://img.shields.io/github/release/OlegGorj/terraform-aws.vpc-bastion-vpn.svg)](https://github.com/OlegGorj/terraform-aws.vpc-bastion-vpn/releases)
+[![GitHub issues](https://img.shields.io/github/issues/OlegGorj/terraform-aws.vpc-bastion-vpn.svg)](https://github.com/OlegGorj/terraform-aws.vpc-bastion-vpn/issues)
 
-# Repository vpcs-with-bastionbox.terraform
+# Repository terraform-aws.vpc-bastion-vpn
 
 Modular Terraform repository to provision a multi-tier VPC in AWS. By default it will create:
 
@@ -293,6 +293,6 @@ And the last step is to destroy all infrastructure
 
 ## TODOs
 
-
+See list of issues
 
 ---
