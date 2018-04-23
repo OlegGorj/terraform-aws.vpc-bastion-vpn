@@ -5,6 +5,16 @@
 
 # Repository terraform-aws.vpc-bastion-vpn
 
+
+> Components of this project was modularized and broken down into separate repositories. This project was retired and no longer supported.
+> Successors are:
+> https://github.com/OlegGorj/terraform-aws.vpc-bastion-vpn
+> https://github.com/OlegGorj/tf-modules-aws-vpc
+> https://github.com/OlegGorj/tf-modules-aws-subnet
+> https://github.com/OlegGorj/tf-modules-aws-bastion
+
+---
+
 Modular Terraform repository to provision a multi-tier VPC in AWS. By default it will create:
 
 - One public and one private subnets in one AZ for the chosen region
